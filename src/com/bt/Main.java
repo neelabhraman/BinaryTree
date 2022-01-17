@@ -6,32 +6,45 @@ import com.bt.svc.TraverseSvc;
 public class Main {
 
     public static void main(String[] args) {
+        BinaryTree node4= new BinaryTree();
+        node4.setValue(new Integer(4));
 
-        BinaryTree binaryTreeLevel2Left= new BinaryTree();
-        binaryTreeLevel2Left.setValue(new Integer(4));
+        BinaryTree node5= new BinaryTree();
+        node5.setValue(new Integer(5));
 
-
-        BinaryTree binaryTreeLevel2Right= new BinaryTree();
-        binaryTreeLevel2Right.setValue(new Integer(5));
-
-        BinaryTree binaryTreeLevel1Left= new BinaryTree();
-        binaryTreeLevel1Left.setValue(new Integer(2));
-        binaryTreeLevel1Left.setLeft(binaryTreeLevel2Left);
-        binaryTreeLevel1Left.setRight(binaryTreeLevel2Right);
-
-        BinaryTree binaryTreeLevel1Right= new BinaryTree();
-        binaryTreeLevel1Right.setValue(new Integer(3));
+        BinaryTree node6= new BinaryTree();
+        node6.setValue(new Integer(6));
 
 
-        // creating new Binary tree
+
+        BinaryTree node8= new BinaryTree();
+        node8.setValue(new Integer(8));
+
+
+        BinaryTree node7= new BinaryTree();
+        node7.setValue(new Integer(7));
+        node7.setLeft(node8);
+        //node7.setRight(node8);
+
+        BinaryTree node2= new BinaryTree();
+        node2.setValue(new Integer(2));
+        node2.setLeft(node4);
+        node2.setRight(node5);
+
+        BinaryTree node3= new BinaryTree();
+        node3.setValue(new Integer(3));
+        node3.setLeft(node6);
+        node3.setRight(node7);
+
+
         BinaryTree binaryTreeRoot= new BinaryTree();
         binaryTreeRoot.setValue(new Integer(1));
-        binaryTreeRoot.setLeft(binaryTreeLevel1Left);
-        binaryTreeRoot.setRight(binaryTreeLevel1Right);
+        binaryTreeRoot.setLeft(node2);
+        binaryTreeRoot.setRight(node3);
 
 
         //print it
         TraverseSvc traverseSvc=new TraverseSvc();
-        traverseSvc.printTree(binaryTreeRoot);
+        traverseSvc.readTree(binaryTreeRoot);
     }
 }
