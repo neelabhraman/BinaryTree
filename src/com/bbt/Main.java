@@ -38,14 +38,14 @@ public class Main {
 
         BinaryTree node2= new BinaryTree();
         node2.setValue(new Integer(2));
-        node2.setLeft(node4);
-        node2.setRight(node5);
+        //node2.setLeft(node4);
+        //node2.setRight(node3);
 
 
         BinaryTree binaryTreeRoot= new BinaryTree();
         binaryTreeRoot.setValue(new Integer(1));
         binaryTreeRoot.setLeft(node2);
-       binaryTreeRoot.setRight(node3);
+       binaryTreeRoot.setRight(node2);
 
 
         //print it

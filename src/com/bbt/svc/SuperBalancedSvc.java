@@ -29,11 +29,7 @@ private static final String LEAF_NODE="LN";
         System.out.println("Final Output: "+linearCompoundStruct);
 
         /*Method to use the compound structure to identify height diff*/
-        int maxHeightDiff=determineMaxHeightDiff(linearCompoundStruct);
-        System.out.println("maxHeightDiff: "+maxHeightDiff);
-        if(maxHeightDiff>1){
-            returnVal=false;
-        }
+        returnVal=determineMaxHeightDiff(linearCompoundStruct);
         return returnVal;
     }
     public void readNode(Deque<BinaryTree> queue, List<Object> linearStruct) {
@@ -111,10 +107,14 @@ private static final String LEAF_NODE="LN";
         return linearCompoundStruct;
     }
 
-    public int  determineMaxHeightDiff( List<List<Object>> linearCompoundStruct) {
+    public boolean  determineMaxHeightDiff( List<List<Object>> linearCompoundStruct) {
+        boolean returnVal=true;
         int maxHeightDiff = 0;
         int upperMostNode=-1;
         int deepestNode=-1;
+        if(linearCompoundStruct.size()==1){
+           return  returnVal;
+        }
         for(int level=0;level<linearCompoundStruct.size();level++){
             if(linearCompoundStruct.get(level).indexOf(LEAF_NODE) !=-1){
                 upperMostNode=level;
@@ -128,6 +128,18 @@ private static final String LEAF_NODE="LN";
             }
         }
         maxHeightDiff=deepestNode-upperMostNode;
-        return maxHeightDiff;
+        System.out.println("maxHeightDiff: "+maxHeightDiff);
+        if(maxHeightDiff>1){
+            returnVal=false;
+        }
+        /*if(maxHeightDiff==0){
+            long lnForZeroDiff=linearCompoundStruct.get(upperMostNode).stream().
+                    filter(item -> item.equals(LEAF_NODE)).count();
+            System.out.println("lnForZeroDiff: "+lnForZeroDiff);
+            if(lnForZeroDiff==1){
+                returnVal=false;
+            }
+        }*/
+        return returnVal;
     }
     }
