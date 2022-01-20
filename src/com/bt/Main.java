@@ -44,8 +44,8 @@ public class Main {
 
         BinaryTree node2= new BinaryTree();
         node2.setValue(new Integer(2));
-        node2.setLeft(node4);
-        node2.setRight(node5);
+      //  node2.setLeft(node4);
+       // node2.setRight(node5);
 
 
         BinaryTree binaryTreeRoot= new BinaryTree();
