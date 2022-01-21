@@ -112,9 +112,6 @@ private static final String LEAF_NODE="LN";
         int maxHeightDiff = 0;
         int upperMostNode=-1;
         int deepestNode=-1;
-        if(linearCompoundStruct.size()==1){
-           return  returnVal;
-        }
         for(int level=0;level<linearCompoundStruct.size();level++){
             if(linearCompoundStruct.get(level).indexOf(LEAF_NODE) !=-1){
                 upperMostNode=level;
@@ -132,14 +129,6 @@ private static final String LEAF_NODE="LN";
         if(maxHeightDiff>1){
             returnVal=false;
         }
-        /*if(maxHeightDiff==0){
-            long lnForZeroDiff=linearCompoundStruct.get(upperMostNode).stream().
-                    filter(item -> item.equals(LEAF_NODE)).count();
-            System.out.println("lnForZeroDiff: "+lnForZeroDiff);
-            if(lnForZeroDiff==1){
-                returnVal=false;
-            }
-        }*/
         return returnVal;
     }
 
