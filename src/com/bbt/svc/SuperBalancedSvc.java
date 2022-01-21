@@ -142,4 +142,66 @@ private static final String LEAF_NODE="LN";
         }*/
         return returnVal;
     }
+
+    /*here we will use Deque as stack (instead of queue)
+    * */
+    public void printTreeDepthWise( BinaryTree root) {
+        Deque<BinaryTree> dQueue= new ArrayDeque<>();
+        dQueue.push(root);
+        while(!dQueue.isEmpty()){
+            BinaryTree node=  dQueue.pop();
+            System.out.println(node.getValue());
+            if(null !=node.getRight()){
+                dQueue.push(node.getRight());
+            }
+            if(null !=node.getLeft()) {
+                dQueue.push(node.getLeft());
+            }
+        }
+    }
+    public boolean isBalancedDepthTraversal( BinaryTree root) {
+        boolean returnVal=true;
+        if(null == root){
+            return true;
+        }
+        List<Integer> depths=new ArrayList<>();
+        Deque<Object> dQueue= new ArrayDeque<>();
+        List<Object> nodeWithDepth=new ArrayList<>();
+        nodeWithDepth.add(root);
+        nodeWithDepth.add(0);
+        dQueue.push(nodeWithDepth);
+        while(!dQueue.isEmpty()){
+            List<Object> poppedElement= (List<Object>) dQueue.pop();
+            BinaryTree node=(BinaryTree)poppedElement.get(0);
+            Integer depth=(Integer) poppedElement.get(1);
+
+            if(node.getRight()==null && node.getLeft()==null){
+                if(depths.indexOf(depth)<0){
+                    depths.add(depth);
+
+                    if((depths.size()>2) || (depths.size()==2  && Math.abs(depths.get(0) -  depths.get(1))>1)){
+                        return false;
+                    }
+                }
+            }
+            else{
+                List<Object> nodeWithDepthTemp=new ArrayList<>();
+                if(null !=node.getRight()){
+                    nodeWithDepthTemp=new ArrayList<>();
+                    nodeWithDepthTemp.add(node.getRight());
+                    nodeWithDepthTemp.add(depth+1);
+                    dQueue.push(nodeWithDepthTemp);
+                }
+                if(null !=node.getLeft()) {
+                    nodeWithDepthTemp=new ArrayList<>();
+                    nodeWithDepthTemp.add(node.getLeft());
+                    nodeWithDepthTemp.add(depth+1);
+                    dQueue.push(nodeWithDepthTemp);
+                }
+            }
+
+        }
+
+        return returnVal;
+        }
     }
