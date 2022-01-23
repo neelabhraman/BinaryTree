@@ -193,4 +193,106 @@ private static final String LEAF_NODE="LN";
 
         return returnVal;
         }
+/*Given a binary tree, determine if it is height-balanced.
+
+For this problem, a height-balanced binary tree is defined as:
+
+a binary tree in which the left and right subtrees of every node differ in height by no more than 1.
+https://leetcode.com/problems/balanced-binary-tree/
+
+ */
+
+    public boolean determineHeightBalanced(BinaryTree root){
+        boolean returnVal=true;
+        if(null == root){
+            return returnVal;
+        }
+        Deque<BinaryTree> dQueue= new ArrayDeque<>();
+
+        dQueue.push(root);
+        while(!dQueue.isEmpty()){
+            int leftSubTreeHeight=0;
+            int rightSubTreeHeight=0;
+            boolean subTreeRootBalancedVal=true;
+            BinaryTree node=  dQueue.pop();
+            System.out.println(node.getValue());
+            subTreeRootBalancedVal=isSubTreeRootBalanced(node);
+            if(!subTreeRootBalancedVal){//root itself is linear and not balanced
+                return subTreeRootBalancedVal;
+            }
+            if(null !=node.getLeft()) {
+                leftSubTreeHeight =getNodeHeight(node.getLeft());
+            }
+            if(null !=node.getRight()) {
+                rightSubTreeHeight =getNodeHeight(node.getRight());
+            }
+            if(Math.abs(leftSubTreeHeight-rightSubTreeHeight)>1){
+                return  false;
+            }
+            else {
+                if (null != node.getRight()) {
+                    dQueue.push(node.getRight());
+                }
+                if (null != node.getLeft()) {
+                    dQueue.push(node.getLeft());
+                }
+            }
+        }
+
+        return  returnVal;
+    }
+
+    public int getNodeHeight( BinaryTree anyNode) {
+        int height=0;
+        if(null == anyNode){
+            return -1;
+        }
+        Deque<Object> dQueue= new ArrayDeque<>();
+        List<Object> nodeWithDepth=new ArrayList<>();
+        nodeWithDepth.add(anyNode);
+        nodeWithDepth.add(0);
+        dQueue.push(nodeWithDepth);
+        while(!dQueue.isEmpty()) {
+            List<Object> poppedElement = (List<Object>) dQueue.pop();
+            BinaryTree node = (BinaryTree) poppedElement.get(0);
+            Integer depthCurrent = (Integer) poppedElement.get(1);
+
+            if (node.getRight() == null && node.getLeft() == null) {//its leaf node
+                if(depthCurrent>height){
+                    height=depthCurrent;
+                }
+            }
+            else{
+                List<Object> nodeWithDepthTemp=new ArrayList<>();
+                if(null !=node.getRight()){
+                    nodeWithDepthTemp=new ArrayList<>();
+                    nodeWithDepthTemp.add(node.getRight());
+                    nodeWithDepthTemp.add(depthCurrent+1);
+                    dQueue.push(nodeWithDepthTemp);
+                }
+                if(null !=node.getLeft()) {
+                    nodeWithDepthTemp=new ArrayList<>();
+                    nodeWithDepthTemp.add(node.getLeft());
+                    nodeWithDepthTemp.add(depthCurrent+1);
+                    dQueue.push(nodeWithDepthTemp);
+                }
+            }
+        }
+
+        return  height;
+    }
+    public boolean isSubTreeRootBalanced(BinaryTree root){
+        boolean returnVal=true;
+        if(null == root){
+            return returnVal;
+        }
+        /*This is a corner case when the Binary tree is straight*/
+        int rootHeight=0;
+        rootHeight=getNodeHeight(root);
+        if((root.getRight() == null || root.getLeft() == null) && rootHeight>1){
+            return  false;
+        }
+        /*--End--*/
+        return  returnVal;
+    }
     }
