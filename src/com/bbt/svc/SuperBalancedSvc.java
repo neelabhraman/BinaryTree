@@ -133,8 +133,10 @@ private static final String LEAF_NODE="LN";
     }
 
     /*here we will use Deque as stack (instead of queue)
+    PREORDER (Root, Left, Right
     * */
     public void printTreeDepthWise( BinaryTree root) {
+        System.out.println("PREORDER");
         Deque<BinaryTree> dQueue= new ArrayDeque<>();
         dQueue.push(root);
         while(!dQueue.isEmpty()){
@@ -148,6 +150,54 @@ private static final String LEAF_NODE="LN";
             }
         }
     }
+
+    /*here we will use Deque as stack (instead of queue)
+    for POST ORDER TRAVERSAL(Left, Right, Root)
+     * */
+    public void printTreeDepthWisePostOrder( BinaryTree root) {
+        System.out.println("POST ORDER");
+        Deque<BinaryTree> traversingQueue= new ArrayDeque<>();
+        Deque<BinaryTree> printingQueue= new ArrayDeque<>();
+        traversingQueue.push(root);
+        while(!traversingQueue.isEmpty()){
+            BinaryTree node=  traversingQueue.pop();
+            printingQueue.push(node);
+
+            if(null !=node.getLeft()) {
+                traversingQueue.push(node.getLeft());
+            }
+            if(null !=node.getRight()){
+                traversingQueue.push(node.getRight());
+            }
+        }
+        //now print the holding queue values
+        while(!printingQueue.isEmpty()){
+            BinaryTree node=  printingQueue.pop();
+            System.out.println(node.getValue());
+        }
+    }
+    /*POST ORDER TRAVERSAL(Left, Right, Root)
+    https://www.geeksforgeeks.org/post-order-traversal-of-binary-tree-in-on-using-o1-space/*/
+
+
+    public void printTreeDepthWisePostOrderRecursion( BinaryTree root) {
+        System.out.println("POST ORDER with recursion ");
+        accessNode(root);
+    }
+
+    public void accessNode (BinaryTree node){
+        if (node.getLeft() !=null){
+            accessNode(node.getLeft());
+        }
+        if (node.getRight() !=null){
+            accessNode(node.getRight());
+        }
+        System.out.println(node.getValue());
+        if(node.getLeft() ==null && node.getRight() ==null){
+            return;
+        }
+    }
+
     public boolean isBalancedDepthTraversal( BinaryTree root) {
         boolean returnVal=true;
         if(null == root){
