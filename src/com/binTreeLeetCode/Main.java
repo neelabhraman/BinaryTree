@@ -1,7 +1,10 @@
 package com.binTreeLeetCode;
 
 
+import com.bbt.entity.BinaryTree;
 import sun.reflect.generics.tree.Tree;
+
+import java.util.*;
 
 /**
  * Definition for a binary tree node.*/
@@ -91,5 +94,120 @@ A binary tree's maximum depth is the number of nodes along the longest path from
             return (1+ Math.max(maxDepth(root.left),maxDepth(root.right)));
 
     }
+
+    public int numOfMinutes(int n, int headID, int[] manager, int[] informTime) {
+        List<Integer> leafNodeArr=new ArrayList<>();
+        int maxTime=0;
+        int timeForLeafToRoot=0;
+        Deque<Integer> queueTraversal= new ArrayDeque<>();
+        Map<Integer,Integer> mapForOptimization= new HashMap();
+
+
+        if(n==1){
+            return 0;
+        }
+        else{
+            for(int j=0;j<n;j++){
+                if(Arrays.asList(manager).indexOf(j)==-1){
+                    leafNodeArr.add(j);
+                }
+            }
+
+            for(int i=0;i<leafNodeArr.size();i++){
+                timeForLeafToRoot=0;
+                int leafNode=leafNodeArr.get(i);
+                queueTraversal.clear();
+                queueTraversal.push(manager[leafNode]);
+                while(!queueTraversal.isEmpty()){
+                    int nodeVal=queueTraversal.pop();
+                    if(mapForOptimization.containsKey(nodeVal)){
+                        timeForLeafToRoot=timeForLeafToRoot+mapForOptimization.get(nodeVal);
+                        break;
+                    }
+                    else if(nodeVal>-1){
+                        timeForLeafToRoot=timeForLeafToRoot+informTime[nodeVal];
+                        queueTraversal.push(manager[nodeVal]);
+                    }
+                }
+                //push to optimum map
+                if(!mapForOptimization.containsKey(manager[leafNode])){
+                    mapForOptimization.put(manager[leafNode],timeForLeafToRoot);
+                }
+                //push to optimum map end
+                if(timeForLeafToRoot>maxTime){
+                    maxTime=timeForLeafToRoot;
+                }
+            }
+
+        }
+        return maxTime;
+    }
+    //merge sort code
+
+    /*
+
+    var sortArray = function(nums) {
+
+    return breakArr(nums);
+
+
+};
+
+var breakArr=function(nums){
+
+
+    if(nums.length ===1){
+        return nums;
+    }
+    else{
+        let divisionPoint=Math.ceil(nums.length/2);
+        let leftArr=nums.slice(0,divisionPoint);
+        let rightArr=nums.slice(divisionPoint,nums.length);
+        let leftArrFin=breakArr(leftArr);
+        let rightArrFin=breakArr(rightArr);
+       let finArr = merge(leftArrFin,rightArrFin,nums.length);
+
+        return finArr;
+
+    }
+
+}
+
+
+
+var merge = function(nums1,nums2,size) {
+ let m=nums1.length;
+ let n=nums2.length;
+    let finArr=[];
+    let i=0;
+    let j=0;
+
+    if(nums1.length===0 && nums2.length===0){
+        return  [];
+    }
+
+    while(finArr.length <= size){
+        if(i=== m){
+            finArr=finArr.concat(nums2.slice(j,n));
+            break;
+        }
+        else if(j=== n){
+            finArr=finArr.concat(nums1.slice(i,m));
+            break;
+        }
+     if(nums1[i] <nums2[j]){
+         finArr.push(nums1[i] );
+         i++;
+     }else{
+         finArr.push(nums2[j]);
+         j++;
+     }
+
+    }
+
+     return finArr;
+
+};
+    * */
 
 }
