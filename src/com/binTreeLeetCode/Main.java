@@ -210,4 +210,133 @@ var merge = function(nums1,nums2,size) {
 };
     * */
 
+
+    //QUICK SORT IMPL
+
+    /*
+    var sortArray = function(nums) {
+
+
+    quickSortImpl(nums,nums.length,0,nums.length-1);
+
+    return nums;
+
+};
+
+
+    const quickSortImpl=function(arr,arrSize,startIndex,endIndex){
+        //startIndex will be 0 in the beginning
+    //quick sort implementation
+    //pivot will be the last element
+
+        let pivot = endIndex;
+        let temp;
+        if(arrSize<=1){
+           return;
+           }
+        for(let i=startIndex;i<=pivot;i++){
+            if(arr[i]>arr[pivot]){
+                //do 3 things when pivot item is smaller
+                temp=arr[pivot];
+                arr[pivot]=arr[i];
+                arr[i]=arr[pivot-1];
+                arr[pivot-1]=temp;
+                pivot--;
+                //start again
+                i=-1;
+            }else if(i===pivot){
+                     let arrSizeLeft;
+                     let startIndexLeft;
+                     let endIndexLeft;
+
+                     let arrSizeRight;
+                     let startIndexRight;
+                     let endIndexRight;
+
+                     //size calculation
+                     arrSizeLeft=pivot-startIndex;
+                     arrSizeRight=endIndex-pivot;
+
+                     //start index calculation
+                        startIndexLeft=startIndex;
+                        startIndexRight=pivot+1;
+
+                    //set end index
+                    endIndexLeft=pivot-1;
+                    endIndexRight=endIndex;
+                //call left
+                quickSortImpl(arr,arrSizeLeft,startIndexLeft,endIndexLeft);
+                //call right
+                quickSortImpl(arr,arrSizeRight,startIndexRight,endIndexRight);
+                     }
+        }
+
+    };
+
+    * */
+    public int[] sortArray(int[] nums) {
+
+        quickSortImpl(nums,nums.length,0,nums.length-1);
+
+        return nums;
+    }
+
+
+    public void quickSortImpl(int[] arr,int arrSize,int startIndex,int endIndex){
+        //startIndex will be 0 in the beginning
+        //quick sort implementation
+        //pivot will be the last element
+
+        int pivot = endIndex;
+        int temp;
+        if(arrSize<=1){
+            return;
+        }
+        for(int i=startIndex;i<=pivot;i++){
+            if(arr[i]>arr[pivot]){
+                //do 3 things when pivot item is smaller
+                //swap
+                //change pivot
+                //restart loop
+
+                temp=arr[pivot];
+                arr[pivot]=arr[i];
+                arr[i]=arr[pivot-1];
+                arr[pivot-1]=temp;
+                //
+                pivot--;
+                //start again
+                i=-1;
+            }else if(i==pivot){
+                int arrSizeLeft;
+                int startIndexLeft;
+                int endIndexLeft;
+
+                int arrSizeRight;
+                int startIndexRight;
+                int endIndexRight;
+
+                //size calculation
+                arrSizeLeft=pivot-startIndex;
+                arrSizeRight=endIndex-pivot;
+
+                //start index calculation
+                startIndexLeft=startIndex;
+                startIndexRight=pivot+1;
+
+                //set end index
+                endIndexLeft=pivot-1;
+                endIndexRight=endIndex;
+                //call left
+                if(arrSizeLeft>0){
+                    quickSortImpl(arr,arrSizeLeft,startIndexLeft,endIndexLeft);
+                }
+                //call right
+                if(arrSizeRight>0){
+                    quickSortImpl(arr,arrSizeRight,startIndexRight,endIndexRight);
+                }
+            }
+        }
+
+    }
 }
