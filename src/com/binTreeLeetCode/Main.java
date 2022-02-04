@@ -339,4 +339,33 @@ var merge = function(nums1,nums2,size) {
         }
 
     }
+
+    /*Count sort*/
+
+    /*
+    1, 4, 1, 2, 7, 5, 2
+
+
+    let countArr=[0,0,0,0,0,0,0,0,0,0];-- for base 10, i.e. 0 to 9
+    let outputArr=[];
+    for (let i=0;i<arrInp.length;i++){
+    countArr[arrInp[i]]++;
+
+    }
+
+    for (let i=1;i<countArr.length;i++){
+    countArr[i]+=countArr[i-1];
+    }
+
+    console.log("countArr before",countArr);
+    for(let i=arrInp.length-1;i>=0;i--){
+    let valueToPut=arrInp[i];
+    countArr[valueToPut]--;
+    outputArr[countArr[valueToPut]]=valueToPut;
+    }
+
+    console.log("countArr after",countArr);
+    console.log("arrInp",arrInp);
+    console.log("outputArr",outputArr);
+    * */
 }
