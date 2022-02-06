@@ -368,4 +368,98 @@ var merge = function(nums1,nums2,size) {
     console.log("arrInp",arrInp);
     console.log("outputArr",outputArr);
     * */
+
+
+
+    //Radix sort
+
+    /*
+
+
+    var sortArray = function(nums) {
+
+    if(nums.length <=1){
+    return nums;
+    }
+    //radix sort
+
+    return radixImpl(nums);
+
+};
+//to do normalization
+
+
+var radixImpl=function(arr){
+
+
+        let maxNumber=arr[0];
+        let smallestNumber=arr[0];
+        let maxDigit=0;
+        let isNormalized=false;
+        for(let i=0;i<arr.length;i++){
+        if(arr[i]>maxNumber){
+            maxNumber=arr[i];
+            }
+         if(arr[i]<smallestNumber){
+            smallestNumber=arr[i];
+            }
+        }
+        //check if we have -ive #s
+        //if yes normalize the array
+        if(smallestNumber<0){
+        isNormalized=true;
+        for(let i=0;i<arr.length;i++){
+            arr[i]=arr[i]+Math.abs(smallestNumber);
+        }
+           maxNumber=maxNumber +Math.abs(smallestNumber);
+        }
+
+
+
+        //now we know the maximim # of digits.
+        maxDigit=maxNumber.toString().length;
+
+
+
+        //# of passes will be maximum digits
+        for(let i=0;i<maxDigit;i++){
+            arr=countSortSubRoutine(arr,i);
+        }
+
+        if(isNormalized){
+            for(let i=0;i<arr.length;i++){
+            arr[i]=arr[i]-Math.abs(smallestNumber);
+             }
+        }
+        return arr;
+    };
+    var countSortSubRoutine=function(arr,pos){
+        //represents digits 0 to 9
+    let countArr=[0,0,0,0,0,0,0,0,0,0];
+        let finArr=[];
+    // populate count
+            for(let i=0;i<arr.length;i++){
+            countArr[(Math.floor(arr[i]/Math.pow(10,pos)))%10]++;
+            }
+
+
+        //cumulate;
+
+        for(let i=1;i<countArr.length;i++){
+            countArr[i]+=countArr[i-1];
+        }
+
+
+        //start populating based on the indexes identified
+        for(let i=arr.length-1;i>=0;i--){
+            let valueToPut=arr[i];
+            countArr[(Math.floor(arr[i]/Math.pow(10,pos)))%10]--;
+            finArr[countArr[(Math.floor(arr[i]/Math.pow(10,pos)))%10]]=valueToPut;
+        }
+        return finArr;
+
+    };
+
+
+    * */
 }
