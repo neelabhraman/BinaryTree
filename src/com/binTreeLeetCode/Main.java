@@ -462,4 +462,40 @@ var radixImpl=function(arr){
 
 
     * */
+    public int countCollisions(String directions) {
+        if(directions.length() == 1){
+            return 0;
+        }
+        int count =0;
+        String couplet;
+        int retreivedWieght;
+        String []convertedArr=new String[directions.length()];
+        Map <String,Integer> weights= new HashMap <>();
+        weights.put("LR",0);
+        weights.put("RL",2);
+        weights.put("LS",0);
+        weights.put("SL",1);
+        weights.put("SR",0);
+        weights.put("RS",1);
+        weights.put("LL",0);
+        weights.put("RR",0);
+        weights.put("SS",0);
+
+        for(int i=0;i<directions.length();i++){
+            convertedArr[i]=Character.toString(directions.charAt(i));
+        }
+
+        for(int i=1;i< convertedArr.length; i++){
+            couplet=convertedArr[i-1]+convertedArr[i];
+            retreivedWieght=weights.get(couplet);
+            count=count+retreivedWieght;
+            if(retreivedWieght>0){
+                convertedArr[i-1]="S";
+                convertedArr[i]="S";
+            }
+
+        }
+        return count;
+
+    }
 }
